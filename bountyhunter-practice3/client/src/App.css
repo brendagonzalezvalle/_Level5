@@ -1,0 +1,62 @@
+*{
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333
+}
+
+h1 {
+    margin: 5px;
+    font-size: 25px;
+}
+
+h2 {
+    margin: 5px;
+    font-size: 15px;
+}
+
+.bounties-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 32px;
+}
+
+.bounty{
+    border: 1px solid #333;
+    padding: 10px;
+    margin: 5px;
+
+}
+
+/* style Bounty form */
+
+form {
+    border: 1px solid #333;
+    padding: 10px;
+    margin: 5px;
+}
+
+input {
+    padding: 10px;
+    font-size: 15px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #333
+}
+
+button {
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 7px;
+}
+
+.bounty-delete-button{
+    background-color: indianred;
+    
+}
+
+.bounty-edit-button{
+    background-color: lightblue;
+     margin: 5px;
+}
