@@ -3,13 +3,10 @@ const app = express()
 const mongoose = require("mongoose")
 const morgan = require("morgan")
 
-
 //Middle ware
 
 app.use(express.json()) // looks for a request body, and turns it into "req.body"
 app.use(morgan('dev')) // logs requests to console
-
-
 
 //Routes
 
@@ -28,8 +25,6 @@ app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
 
 })
-
-
 //Listen
 
 app.listen("8000", () => {

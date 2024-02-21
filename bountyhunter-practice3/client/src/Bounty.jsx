@@ -28,6 +28,7 @@ export default function Bounty(props){
                 <BountyForm
                     firstName={firstName}
                     lastName={lastName}
+                    bountyAmount={bountyAmount}
                     _id={_id}
                     buttonText="Submit Edit"
                     submit={updateBounty}

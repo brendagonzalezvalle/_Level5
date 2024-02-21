@@ -3,15 +3,16 @@ const inventoryRouter = express.Router()
 const Inventory = require("../models/inventory.js")
 
 //Get one by Id using find by Id method
+//using findById() method
 
 inventoryRouter.get("/:inventoryId", (req, res, next) => {
-    Inventory.findById(req.params.inventoryId, (err, items) => {
+    Inventory.findById(req.params.inventoryId, (err, item) => {
         if(err){
             res.status(500)
             return next(err)
 
         }
-        return res.status(200).send(items)
+        return res.status(200).send(item)
     })
     
 })
@@ -19,7 +20,9 @@ inventoryRouter.get("/:inventoryId", (req, res, next) => {
 
 
 
+
 //Get request for all items in database
+//using .find() method
 
 inventoryRouter.get("/", (req, res, next) => {
     Inventory.find((err, items) => {
@@ -31,7 +34,12 @@ inventoryRouter.get("/", (req, res, next) => {
     })
 })
 
+
+
 //Post new items 
+// .save() method
+//req.body when creating a new object with the schema built in models
+
 inventoryRouter.post("/", (req, res, next) => {
     const newInventory = new Inventory(req.body) //req.body is given to us by express.json( when a body is given to us for a put or post request
     newInventory.save((err, saveInventory) => {
@@ -44,6 +52,7 @@ inventoryRouter.post("/", (req, res, next) => {
 })
 
 //delete one item
+// findOneAndDelete() method
 
 inventoryRouter.delete("/:inventoryId", (req, res, next) => {
     Inventory.findOneAndDelete({_id: req.params.inventoryId}, (err, deletedItem) =>{
@@ -56,7 +65,10 @@ inventoryRouter.delete("/:inventoryId", (req, res, next) => {
 })
 
 
+
+
 //Put 
+// Use findOneAndUpdate() method
 
 inventoryRouter.put("/:inventoryId", (req, res, next) => {
     Inventory.findOneAndUpdate(

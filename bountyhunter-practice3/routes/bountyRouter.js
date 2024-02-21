@@ -40,6 +40,9 @@ const Bounty = require("../models/bounties.js")
 // Get All
 
 
+//Add Mongoose Queries to each request type in order to get the necessary information. (See Code example below)
+
+
 // Get All
 bountyRouter.get("/", (req, res, next) => {
     Bounty.find((err, bounty) => {

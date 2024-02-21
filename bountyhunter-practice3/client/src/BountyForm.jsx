@@ -3,14 +3,15 @@ import React, {useState} from "react";
 export default function BountyForm(props){
 
     const intitData = { 
-        firstName: "",
-        lastName: "",
-        bountyAmount: 0,
+        firstName: props.firstName || "",
+        lastName: props.lastName || "",
+        bountyAmount: props.bountyAmount || 0 ,
         living: "",
         type: ""
 
 
     }
+    console.log(props)
     const [formData, setFormData] = useState(intitData)
 
     function handleChange(e){
