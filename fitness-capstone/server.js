@@ -14,6 +14,11 @@ mongoose.connect("mongodb+srv://brendagonzalez22valle:X9zjhWLADk9osiwS@cluster0.
     console.log("MongoDB is connected")
 })
 
+//Routes
+
+app.use("/api/workouts", require("./routes/workoutRouter.js"))
+app.use("/api/list", require("./routes/workoutListRouter.js"))
+
 //Listen
 
 app.listen("8000", () => {
