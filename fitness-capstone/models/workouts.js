@@ -4,13 +4,13 @@ const Schema = mongoose.Schema
 
 const workoutSchema = new Schema ({
     date: {
-        type: Date,
-        required: true
-    },
-    workoutComplete: {
-        type: Boolean,
+        type: String,
         required: true
     }
+    // workoutComplete: {
+    //     type: Boolean,
+    //     required: true
+    // }
 
 })
 

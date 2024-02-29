@@ -5,11 +5,13 @@ import WorkoutList from '../components/WorkoutList'
 import Home from '../components/Home'
 import Dashboard from '../components/Dashboard'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
+// import { post } from '../../routes/workoutRouter'
 
 
 function App() {
 
   const [workoutsList, setWorkoutsList] = useState([])
+  const [workouts, setWorkouts] = useState([])
 
 
   //Get all
@@ -18,9 +20,27 @@ function App() {
     .then(res => setWorkoutsList(res.data))
     .catch(err => console.log(err.response.data.errMsg))// errMsg set up in server
   }
- 
+
+  function completedWorkouts(){
+    axios.get("/api/workouts") //moved get request into is own function to make it more re-usable
+    .then(res => setWorkouts(res.data))
+    .catch(err => console.log(err.response.data.errMsg))// errMsg set up in server
+  }
+//  post
+ function postWorkout(newWorkout){
+  axios.post("/api/workouts", newWorkout)
+  .then(res => {
+    setWorkouts(prev => [...prev, res.data]) //update state to set it to a new array that has all prev data , but new bounty at the end the response.data, this will re render the page so that it remaps bounties below on wep page
+  
+  })
+  .catch(err => console.log(err))
+}
+
+
   useEffect(() => {
-    getWorkoutList() //call function within useEffect
+    getWorkoutList()
+    completedWorkouts()
+     //call function within useEffect
   }, []) // this will only fire once since the dependency is an empty array
 
 
@@ -29,17 +49,20 @@ function App() {
 
       <Router>
 
-        <nav style={{margin: 10}}>
-          <Link to="/" style={{padding: 5}} > Home </Link>
-          <Link to="/list" style={{padding: 5}} > Workout List </Link>
-          <Link to="/dashboard" style={{padding: 5}} > Dashboard </Link>
+        <nav className="nav-container" >
+          <Link to="/" style={{padding: 5}} className='nav-header'> Home </Link>
+          <Link to="/list" style={{padding: 5}} className='nav-header'> Workout List </Link>
+          <Link to="/dashboard" style={{padding: 5}} className='nav-header'> Dashboard </Link>
 
 
         </nav>
 
 
         <Routes>
-          <Route path="/" element={<Home/>}  />
+          <Route path="/" element={
+          <Home
+          workouts={workouts}
+          submit={postWorkout}/>}/>
 
           <Route path="/list" element= {workoutsList.map(workout => 
             <WorkoutList 
@@ -47,7 +70,7 @@ function App() {
             key={workout.title}/>)} 
           />
 
-          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/dashboard" element={<Dashboard workouts={workouts}/>}/>
 
 
         </Routes>
